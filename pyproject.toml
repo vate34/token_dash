@@ -1,0 +1,22 @@
+[project]
+name = "token-dash"
+version = "1.0.0"
+description = "macOS menu bar token usage dashboard for pi-agent and opencode"
+requires-python = ">=3.9"
+dependencies = [
+    "pyobjc-framework-Cocoa>=10.0",
+    "pyobjc-framework-WebKit>=10.0",
+]
+
+[project.scripts]
+token-dash = "token_dash.app:main"
+
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["*"]
+
+[tool.uv]
+dev-dependencies = []
