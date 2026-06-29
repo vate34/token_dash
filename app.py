@@ -199,7 +199,7 @@ class Delegate(NSObject):
     def refresh_data(self):
         """Read all sources, aggregate, and update webview."""
         try:
-            now = datetime.now(timezone.utc)
+            now = datetime.now()
             # Serialize now for output
             now_iso = now.isoformat()
         except Exception:

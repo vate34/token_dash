@@ -1,7 +1,7 @@
 """Aggregate token records by time bucket and model."""
 
 from collections import defaultdict
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 from typing import Optional
 
 from .record import ModelStats, Record
@@ -20,7 +20,7 @@ def aggregate(records: list[Record], now: Optional[datetime] = None) -> dict:
         }
     """
     if now is None:
-        now = datetime.now(timezone.utc)
+        now = datetime.now()
     today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
     week_start = today_start - timedelta(days=6)
     month_start = today_start - timedelta(days=29)
@@ -29,7 +29,8 @@ def aggregate(records: list[Record], now: Optional[datetime] = None) -> dict:
 
     for rec in records:
         buckets = result[rec.source]
-        ts = rec.ts
+        # Convert UTC timestamp to local time for day-boundary comparison
+        ts = rec.ts.astimezone().replace(tzinfo=None)  # UTC → naive local time
 
         for bname, start in [
             ("today", today_start),
