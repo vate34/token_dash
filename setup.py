@@ -21,7 +21,7 @@ OPTIONS = {
         "PyObjCTools.KeyValueCoding",
     ],
     "resources": [
-        (".", ["token_dash/.venv/lib/python3.9/site-packages/PyObjCTools"]),
+        (".", [".venv/lib/python3.9/site-packages/PyObjCTools"]),
     ],
 }
 
@@ -30,5 +30,4 @@ setup(
     app=APP,
     data_files=DATA_FILES,
     options={"py2app": OPTIONS},
-    install_requires=[],
 )
