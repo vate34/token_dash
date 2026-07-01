@@ -56,13 +56,13 @@ tabs b.on{background:#e8e8ed;border-color:#c7c7cc;color:#1c1c1e;font-weight:600}
 
 .mdl{margin-bottom:10px}
 .mdl .mn{font-size:11px;font-weight:500;color:#1c1c1e;margin-bottom:3px}
-.bar-row{display:flex;align-items:center;gap:6px;margin-bottom:2px;font-size:10px}
-.bar-row .lbl{width:26px;color:#8e8e93;text-align:right;flex-shrink:0;font-size:10px}
-.bar-row .fill{flex:1;height:5px;background:#e5e5ea;border-radius:3px;overflow:hidden}
+.bar-row{display:grid;grid-template-columns:auto 1fr auto;gap:8px;margin-bottom:2px;font-size:10px;align-items:center}
+.bar-row .lbl{color:#8e8e93;text-align:right;font-size:10px}
+.bar-row .fill{height:5px;background:#e5e5ea;border-radius:3px;overflow:hidden}
 .bar-row .fill-in{background:#0071e3;height:100%;border-radius:3px}
 .bar-row .fill-out{background:#248b4a;height:100%;border-radius:3px}
 .bar-row .fill-ca{background:#8944ab;height:100%;border-radius:3px}
-.bar-row .val{width:46px;text-align:right;flex-shrink:0;font-size:10px;font-weight:500}
+.bar-row .val{font-size:10px;font-weight:500;text-align:right}
 .in{color:#0071e3} .out{color:#248b4a} .ca{color:#8944ab}
 
 .sum{border-top:1px solid #d1d1d6;padding-top:6px;display:flex;justify-content:space-between;font-size:11px;flex-wrap:wrap;gap:4px;margin-top:2px}
@@ -75,8 +75,8 @@ tabs b.on{background:#e8e8ed;border-color:#c7c7cc;color:#1c1c1e;font-weight:600}
 </head>
 <body>
 <tabs>
-<b id="tb-pi" class="on" onclick="swTab('pi-agent')">Pi-Agent</b>
-<b id="tb-oc" onclick="swTab('opencode')">OpenCode</b>
+<b id="tb-oc" class="on" onclick="swTab('opencode')">OpenCode</b>
+<b id="tb-pi" onclick="swTab('pi-agent')">Pi-Agent</b>
 </tabs>
 
 <hdr>
@@ -88,10 +88,11 @@ tabs b.on{background:#e8e8ed;border-color:#c7c7cc;color:#1c1c1e;font-weight:600}
 </hdr>
 
 <div id="ct"></div>
+<div class="quit-wrap"><button class="quit-btn" onclick="quit()"><span>⏻</span><span>退出</span></button></div>
 
 <script>
 var D = {};
-var tab = "pi-agent";
+var tab = "opencode";
 var rng = "today";
 
 function F(n){if(!n)return"0";if(n<1000)return""+n;if(n<1e6)return(n/1000).toFixed(1)+"K";return(n/1e6).toFixed(1)+"M"}
@@ -120,7 +121,6 @@ function R(){
   h+='<span class="out">输出 '+F(ta.out)+'</span> &nbsp; ';
   h+='<span class="ca">缓存 '+F(ta.ca)+'</span> &nbsp; ';
   h+='<b>总计 '+F(tot)+'</b></span></div>';
-  h+='<div class="quit-wrap"><button class="quit-btn" onclick="quit()"><span>⏻</span><span>退出</span></button></div>';
   c.innerHTML=h
 }
 
