@@ -2,10 +2,20 @@
 
 import zlib
 import os
+import subprocess
+import sys
 
 # Fix for Python 3.12+ where zlib is built-in and lacks __file__
 if not hasattr(zlib, "__file__"):
     zlib.__file__ = __file__
+
+# Generate icon if not present
+_icon_path = os.path.join(os.path.dirname(__file__), "assets", "app.icns")
+if not os.path.exists(_icon_path):
+    subprocess.run(
+        [sys.executable, os.path.join(os.path.dirname(__file__), "scripts", "make_icon.py")],
+        check=True,
+    )
 
 from setuptools import setup
 
