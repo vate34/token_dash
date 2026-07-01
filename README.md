@@ -25,7 +25,7 @@ macOS 菜单栏 Token 用量监视器，统计 **pi-agent** 和 **OpenCode** 的
 ```bash
 git clone git@github.com:vate34/token_dash.git
 cd token_dash
-uv sync --python-preference only-system
+uv sync
 bash run.sh
 ```
 
@@ -56,6 +56,6 @@ pkill -f "Token Dash"
 
 ## 技术栈
 
-- Python 3.9+ / PyObjC (AppKit + WebKit)
+- Python 3.12+ / PyObjC (AppKit + WebKit)
 - 内嵌 HTML + 原生 CSS（无框架依赖）
 - uv 管理依赖与打包运行

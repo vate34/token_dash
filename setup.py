@@ -1,5 +1,12 @@
 """py2app setup script for Token Dashboard."""
 
+import zlib
+import os
+
+# Fix for Python 3.12+ where zlib is built-in and lacks __file__
+if not hasattr(zlib, "__file__"):
+    zlib.__file__ = __file__
+
 from setuptools import setup
 
 APP = ["runner.py"]
@@ -15,19 +22,30 @@ OPTIONS = {
         "CFBundleShortVersionString": "1.0.0",
         "NSHighResolutionCapable": True,
     },
-    "packages": ["token_dash", "Foundation", "AppKit", "WebKit", "Quartz", "CoreFoundation", "objc", "PyObjCTools"],
+    "packages": ["token_dash", "Foundation", "AppKit", "WebKit", "Quartz", "CoreFoundation", "objc"],
     "includes": [
         "Foundation", "AppKit", "WebKit", "Quartz", "CoreFoundation", "objc",
         "PyObjCTools.KeyValueCoding",
     ],
-    "resources": [
-        (".", [".venv/lib/python3.9/site-packages/PyObjCTools"]),
-    ],
 }
+
+kwargs: dict = {}
+try:
+    from py2app.build_app import py2app as _py2app
+
+    class Py2App(_py2app):
+        def finalize_options(self):
+            self.distribution.install_requires = None
+            super().finalize_options()
+
+    kwargs["cmdclass"] = {"py2app": Py2App}
+except ImportError:
+    pass
 
 setup(
     name="Token Dash",
     app=APP,
     data_files=DATA_FILES,
     options={"py2app": OPTIONS},
+    **kwargs,
 )
