@@ -21,7 +21,9 @@ OPTIONS = {
         "CFBundleVersion": "1.0.0",
         "CFBundleShortVersionString": "1.0.0",
         "NSHighResolutionCapable": True,
+        "CFBundleIconFile": "app.icns",
     },
+    "resources": [("", ["assets/app.icns"])],
     "packages": ["token_dash", "Foundation", "AppKit", "WebKit", "Quartz", "CoreFoundation", "objc"],
     "includes": [
         "Foundation", "AppKit", "WebKit", "Quartz", "CoreFoundation", "objc",
