@@ -17,6 +17,7 @@ jobs:
 
       - name: Build
         run: |
+          python3 scripts/make_icon.py
           uv sync
           uv run python setup.py py2app
 
