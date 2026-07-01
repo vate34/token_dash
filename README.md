@@ -32,12 +32,7 @@ bash run.sh
 ### 打包为 .app
 
 ```bash
-uv pip install py2app setuptools --python-preference only-system
-
-# PyObjCTools 是 namespace package，py2app 需要 __init__.py
-touch .venv/lib/python3.*/site-packages/PyObjCTools/__init__.py
-
-python setup.py py2app
+uv run python setup.py py2app
 open dist/Token\ Dash.app
 ```
 
@@ -63,4 +58,4 @@ pkill -f "Token Dash"
 
 - Python 3.9+ / PyObjC (AppKit + WebKit)
 - 内嵌 HTML + 原生 CSS（无框架依赖）
-- uv 管理依赖，py2app 打包
+- uv 管理依赖与打包运行
